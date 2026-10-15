@@ -1,10 +1,15 @@
 class Bank:
-    def __init__(self, code, address):
+    def __init__(self, code, address, accounts=None):
         self.code = code
         self.address = address
+        self.accounts = accounts
 
     def getAccounts(self):
-        print("Nama Bank: ", self.code, "Alamat: ", self.address)
+        if self.accounts:
+            print(f"Accounts = {self.accounts.number} | Saldo = {self.accounts.balance}")
+            print("Bank Code = ", self.code, "| Bank Address = ", self.address)
+        else:
+            print("tidak ada")
 
 class Customer:
     def __init__(self, name, address, dob, card_number, pin, accounts=None):
@@ -61,9 +66,9 @@ class ATM:
         transaksi = ATMTransaction(102, "24-09-2026", "Withdraw", amount, account.balance)
         transaksi.modifies(account)
 
-bank1 = Bank("BCA", "Purwokerto")
 account1 = Account(112233, 1000000)
-customer1 = Customer("Budi", "Purwokerto", "15-05-2004", "1234567890", "1234", [account1])
+bank1 = Bank("BCA", "Purwokerto", account1)
+customer1 = Customer("Budi", "Purwokerto", "15-05-2004", "1234567890", "1234")
 atm1 = ATM("Kampus", bank1.code)
 transaksi1 = ATMTransaction(101, "24-09-2026", "Deposit", 500000, 1500000)
 
